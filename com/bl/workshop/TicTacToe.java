@@ -11,7 +11,7 @@ public class TicTacToe {
         System.out.println("Game initiated!");
 
         //Display the initial board
-        for (int i = 0; i < board.length; i++) {
+        for(int i = 0; i < board.length; i++) {
             board[i] = '-';
         }
 
@@ -22,23 +22,25 @@ public class TicTacToe {
 
         //Create a gameEnded boolean and use it as the condition in the while loop
         boolean gameEnded = false;
-        while (!gameEnded) {
+        while(!gameEnded) {
             //Draw the board
             showboard(board);
 
             char inputChoice = chooseLetter();
-            System.out.println("\n" + player + " has chosen " + inputChoice);
+            System.out.println("\n" + "Player has chosen " +inputChoice);
 
             playerPosition(inputChoice, board);
 
             //Check to see if either player has won
-            if (playerHasWon(board) == 'X') {
+            if(playerHasWon(board) == 'X') {
                 System.out.println(player + " wins!");
                 gameEnded = true;
-            } else if (playerHasWon(board) == 'O') {
+            }
+            else if(playerHasWon(board) == 'O') {
                 System.out.println(player + " wins!");
                 gameEnded = true;
-            } else {
+            }
+            else {
                 //If neither player has won, check to see if there has been a tie (if the board is full)
                 if (boardIsFull(board)) {
                     System.out.println("It's a tie!");
@@ -47,6 +49,20 @@ public class TicTacToe {
                     //If player1 is true, make it false, and vice versa; this way, the players alternate each turn
                     player1 = !player1;
                 }
+            }
+            while(gameEnded == true) {
+                System.out.println("Play another game? Y | N");
+                char option = input.next().charAt(0);
+
+                if(option == 'Y') {
+                    //Initilise the board with '-' to again start playing
+                    gameEnded = false;
+                    for (int i = 0; i < board.length; i++) {
+                        board[i] = '-';
+                    }
+                }
+                else
+                    break;
             }
         }
 
@@ -76,10 +92,10 @@ public class TicTacToe {
         int position = input.nextInt();
 
         //Check if the postion does not exceed
-        if (position < 0 || position > 8)
+        if(position < 0 || position > 8)
             System.out.println("This position is out of the bounds of the board! Try again!");
             //Check if the position on the board the user entered is empty or not
-        else if (board[position] != '-')
+        else if(board[position] != '-')
             System.out.println("Someone has already made a move at this position! Try again!" + "\n");
         else
             board[position] = inputCharUser;
@@ -90,7 +106,7 @@ public class TicTacToe {
         int randomNumber = (int) Math.floor(Math.random() * 10) % 2;
         String player = "";
 
-        if (randomNumber == 1)
+        if(randomNumber == 1)
             player = "User";
         else
             player = "Computer";
@@ -106,25 +122,25 @@ public class TicTacToe {
         for (int i = 0; i < 8; i++) {
 
             //Check for rows
-            if (board[0] == board[1] && board[1] == board[2] && board[0] != '-' && board[1] != '-' && board[2] != '-')
+            if(board[0] == board[1] && board[1] == board[2] && board[0] != '-' && board[1] != '-' && board[2] != '-')
                 return board[i];
-            if (board[3] == board[4] && board[4] == board[5] && board[3] != '-' && board[4] != '-' && board[5] != '-')
+            if(board[3] == board[4] && board[4] == board[5] && board[3] != '-' && board[4] != '-' && board[5] != '-')
                 return board[i];
-            if (board[6] == board[7] && board[7] == board[8] && board[6] != '-' && board[7] != '-' && board[8] != '-')
+            if(board[6] == board[7] && board[7] == board[8] && board[6] != '-' && board[7] != '-' && board[8] != '-')
                 return board[i];
 
             //Check for columns
-            if (board[0] == board[3] && board[3] == board[6] && board[0] != '-' && board[3] != '-' && board[6] != '-')
+            if(board[0] == board[3] && board[3] == board[6] && board[0] != '-' && board[3] != '-' && board[6] != '-')
                 return board[i];
-            if (board[1] == board[4] && board[4] == board[7] && board[1] != '-' && board[4] != '-' && board[7] != '-')
+            if(board[1] == board[4] && board[4] == board[7] && board[1] != '-' && board[4] != '-' && board[7] != '-')
                 return board[i];
-            if (board[2] == board[5] && board[5] == board[8] && board[2] != '-' && board[5] != '-' && board[8] != '-')
+            if(board[2] == board[5] && board[5] == board[8] && board[2] != '-' && board[5] != '-' && board[8] != '-')
                 return board[i];
 
             //Check for diagonals
-            if (board[0] == board[4] && board[4] == board[8] && board[0] != '-' && board[4] != '-' && board[8] != '-')
+            if(board[0] == board[4] && board[4] == board[8] && board[0] != '-' && board[4] != '-' && board[8] != '-')
                 return board[i];
-            if (board[2] == board[4] && board[4] == board[6] && board[2] != '-' && board[4] != '-' && board[6] != '-')
+            if(board[2] == board[4] && board[4] == board[6] && board[2] != '-' && board[4] != '-' && board[6] != '-')
                 return board[i];
         }
         return '-';
@@ -132,8 +148,8 @@ public class TicTacToe {
 
     //Check if all of the positions on the board have been filled
     public static boolean boardIsFull(char[] board) {
-        for (int i = 0; i < board.length; i++) {
-            if (board[i] == '-') {
+        for(int i = 0; i < board.length; i++) {
+            if(board[i] == '-') {
                 return false;
             }
         }
