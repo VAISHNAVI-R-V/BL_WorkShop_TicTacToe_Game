@@ -1,8 +1,9 @@
 package com.bl.workshop;
+
 /**
- * As a Player would like to see the board so I can choose the
- *                     valid cells to make my move during my turn
- * Write a method showBoard to display the current Board
+ * Ability to check for the free space before making the desired move
+ * Extend UC4 to check if the free space is available for the move
+ * In case available make the move
  */
 
 import java.util.Scanner;
@@ -23,8 +24,11 @@ public class TicTacToe {
         char inputChoice = chooseLetter();
         System.out.println("Player has chosen " +inputChoice);
 
+        playerPosition(inputChoice, board);
+        showboard(board);
     }
 
+    //Display the board
     public static void showboard(char[] board) {
         System.out.println("\n" + "Displaying the Tic Tac Toe Board");
         System.out.println(board[0] + "  " + board[1] + "  " + board[2]);
@@ -32,10 +36,26 @@ public class TicTacToe {
         System.out.println(board[6] + "  " + board[7] + "  " + board[8]);
     }
 
+    //Initiate the game by asking the player to choose the input
     public static char chooseLetter() {
         System.out.println("\n" + "Enter your choice: X | O");
         char choice = input.next().charAt(0);
 
         return choice;
+    }
+
+    //Ask the user for what position they want to place their x or o
+    public static void playerPosition(char inputCharUser, char[] board) {
+        System.out.print("Enter the position you want to enter the value:  ");
+        int position = input.nextInt();
+
+        //Check if the postion does not exceed
+        if(position < 0 || position > 8)
+            System.out.println("This position is out of the bounds of the board! Try again!");
+            //Check if the position on the board the user entered is empty or not
+        else if(board[position] != '-')
+            System.out.println("Someone has already made a move at this position! Try again!" + "\n");
+        else
+            board[position] = inputCharUser;
     }
 }
