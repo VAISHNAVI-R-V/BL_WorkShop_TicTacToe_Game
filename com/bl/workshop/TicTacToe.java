@@ -1,28 +1,30 @@
 package com.bl.workshop;
 
 /**
- * Ability to check for the free space before making the desired move
- * Extend UC4 to check if the free space is available for the move
- * In case available make the move
+ * Toss to check who plays first.
+ * Use Random to determine who starts first, the computer or the user
  */
 
 import java.util.Scanner;
 
 public class TicTacToe {
     static Scanner input = new Scanner(System.in);
+
     public static void main(String[] args) {
         char[] board = new char[10];
 
         System.out.println("Game initiated!");
 
         //Display the initial board
-        for(int i = 0; i < board.length; i++) {
+        for (int i = 0; i < board.length; i++) {
             board[i] = '-';
         }
         showboard(board);
 
+        whoPlaysFirst();
+
         char inputChoice = chooseLetter();
-        System.out.println("Player has chosen " +inputChoice);
+        System.out.println("Player has chosen " + inputChoice);
 
         playerPosition(inputChoice, board);
         showboard(board);
@@ -50,12 +52,27 @@ public class TicTacToe {
         int position = input.nextInt();
 
         //Check if the postion does not exceed
-        if(position < 0 || position > 8)
+        if (position < 0 || position > 8)
             System.out.println("This position is out of the bounds of the board! Try again!");
             //Check if the position on the board the user entered is empty or not
-        else if(board[position] != '-')
+        else if (board[position] != '-')
             System.out.println("Someone has already made a move at this position! Try again!" + "\n");
         else
             board[position] = inputCharUser;
+    }
+
+    //Toss to check who plays first
+    public static String whoPlaysFirst() {
+        int randomNumber = (int) Math.floor(Math.random() * 10) % 2;
+        String player = "";
+
+        if (randomNumber == 1)
+            player = "User";
+        else
+            player = "Computer";
+
+        System.out.println("\n" + player + " starts first.");
+
+        return player;
     }
 }
